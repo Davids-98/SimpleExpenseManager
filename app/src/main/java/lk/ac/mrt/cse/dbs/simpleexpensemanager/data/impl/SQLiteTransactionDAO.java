@@ -50,9 +50,9 @@ public class SQLiteTransactionDAO implements TransactionDAO {
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst()) {
             do {
-                String accountNo = cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_RELAVANT_ACCOUNT_NO));
+                String accountNo = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_RELAVANT_ACCOUNT_NO));
 
-                String dateStr = cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_DATE));
+                String dateStr = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_DATE));
                 SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = null;
                 try {
@@ -61,8 +61,8 @@ public class SQLiteTransactionDAO implements TransactionDAO {
                     e.printStackTrace();
                 }
 
-                ExpenseType expenceType = ExpenseType.valueOf(cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_EXPENSE_TYPE)));
-                double amount = cursor.getDouble(cursor.getColumnIndex(SQLiteHelper.COLUMN_AMOUNT));
+                ExpenseType expenceType = ExpenseType.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_EXPENSE_TYPE)));
+                double amount = cursor.getDouble(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_AMOUNT));
 
                 Transaction transaction = new Transaction(date, accountNo, expenceType, amount);
                 transactionLogs.add(transaction);
@@ -84,10 +84,10 @@ public class SQLiteTransactionDAO implements TransactionDAO {
             SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
             if (cursor.moveToFirst()) {
                 do {
-                    String accountNo = cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_RELAVANT_ACCOUNT_NO));
-                    String dateStr = cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_DATE));
-                    ExpenseType expenceType = ExpenseType.valueOf(cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_EXPENSE_TYPE)));
-                    double amount = cursor.getDouble(cursor.getColumnIndex(SQLiteHelper.COLUMN_AMOUNT));
+                    String accountNo = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_RELAVANT_ACCOUNT_NO));
+                    String dateStr = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_DATE));
+                    ExpenseType expenceType = ExpenseType.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_EXPENSE_TYPE)));
+                    double amount = cursor.getDouble(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_AMOUNT));
 
                     Transaction transaction = new Transaction(d.parse(dateStr), accountNo, expenceType, amount);
                     PtransactionLogs.add(transaction);

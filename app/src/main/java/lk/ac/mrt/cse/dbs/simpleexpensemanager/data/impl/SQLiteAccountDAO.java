@@ -32,7 +32,7 @@ public class SQLiteAccountDAO implements AccountDAO {
 
         if (cursor.moveToFirst()) {
             do {
-                String accountNo = cursor.getString(cursor.getColumnIndex("accountNo"));
+                String accountNo = cursor.getString(cursor.getColumnIndexOrThrow("accountNo"));
                 accountNumbers.add(accountNo);
             } while (cursor.moveToNext());
         }else {
@@ -50,10 +50,10 @@ public class SQLiteAccountDAO implements AccountDAO {
         Cursor cursor = db.rawQuery(queryString,null);
         if (cursor.moveToFirst()) {
             do {
-                String accountNo = cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_ACCOUNT_NO));
-                String bankName = cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_BANK_NAME));
-                String accountHolderName = cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_ACCOUNT_HOLDER_NAME));
-                double balance = cursor.getDouble(cursor.getColumnIndex(SQLiteHelper.COLUMN_BALANCE));
+                String accountNo = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_ACCOUNT_NO));
+                String bankName = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_BANK_NAME));
+                String accountHolderName = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_ACCOUNT_HOLDER_NAME));
+                double balance = cursor.getDouble(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_BALANCE));
 
                 Account account = new Account(accountNo, bankName, accountHolderName,balance);
                 accounts.add(account);
@@ -74,10 +74,10 @@ public class SQLiteAccountDAO implements AccountDAO {
 
         if (cursor.moveToFirst()) {
 
-            String NoOfAccount = cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_ACCOUNT_NO));
-            String bankName = cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_BANK_NAME));
-            String accountHolderName = cursor.getString(cursor.getColumnIndex(SQLiteHelper.COLUMN_ACCOUNT_HOLDER_NAME));
-            double balance = cursor.getDouble(cursor.getColumnIndex(SQLiteHelper.COLUMN_BALANCE));
+            String NoOfAccount = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_ACCOUNT_NO));
+            String bankName = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_BANK_NAME));
+            String accountHolderName = cursor.getString(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_ACCOUNT_HOLDER_NAME));
+            double balance = cursor.getDouble(cursor.getColumnIndexOrThrow(SQLiteHelper.COLUMN_BALANCE));
             Account account = new Account(NoOfAccount, bankName, accountHolderName, balance);
             return account;
         }else {
