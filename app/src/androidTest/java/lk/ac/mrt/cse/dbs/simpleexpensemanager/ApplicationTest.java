@@ -32,6 +32,7 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.ExpenseManager;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.PersistentExpenseManager;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.exception.ExpenseManagerException;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.exception.InvalidAccountException;
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.ExpenseType;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
@@ -53,5 +54,17 @@ public class ApplicationTest {
     @Test
     public void AddedAccountChecking(){
         assertTrue(expenseManager.getAccountNumbersList().contains("190545H"));
+    }
+
+    @Test
+    public void checkTransaction() {
+        int current_size = expenseManager.getTransactionsDAO().getAllTransactionLogs().size();
+        try {
+            expenseManager.updateAccountBalance("190545H", 10, 5, 2022, ExpenseType.valueOf("EXPENSE"), "1000");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(expenseManager.getTransactionsDAO().getAllTransactionLogs().size() - current_size == 1);
     }
 }
