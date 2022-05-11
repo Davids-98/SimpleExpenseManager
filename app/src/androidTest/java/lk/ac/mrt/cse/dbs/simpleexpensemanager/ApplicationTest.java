@@ -57,7 +57,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void checkTransaction() {
+    public void checkingTransaction() {
         int current_size = expenseManager.getTransactionsDAO().getAllTransactionLogs().size();
         try {
             expenseManager.updateAccountBalance("190545H", 10, 5, 2022, ExpenseType.valueOf("EXPENSE"), "1000");
